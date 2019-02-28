@@ -50,7 +50,7 @@ defmodule Mastermind.Core.Game do
     %{
       board: nil, 
       finished: nil, 
-      nil,
+      won: nil,
     }
   end
 end
