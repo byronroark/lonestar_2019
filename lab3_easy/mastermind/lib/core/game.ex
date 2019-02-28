@@ -22,11 +22,9 @@ defmodule Mastermind.Core.Game do
   end
   
   def move(game, guess) do
-    %__MODULE__{game| guesses: [guess|game.guesses]}
   end
   
   def won?(%{ guesses: []}) do
-    false
   end
   def won?(game) do
     guess = List.first(game.guesses)
@@ -37,7 +35,6 @@ defmodule Mastermind.Core.Game do
   end
   
   def finished?(game) do
-    length(game.guesses) == 10 || won?(game)
   end
   
   def board(game) do
@@ -47,14 +44,13 @@ defmodule Mastermind.Core.Game do
   end
   
   defp row(game, guess) do
-    [guess, Score.new(game.answer, guess)]
   end
   
   def state(game) do
     %{
-      board: board(game), 
-      finished: finished?(game), 
-      won: won?(game),
+      board: nil, 
+      finished: nil, 
+      nil,
     }
   end
 end
