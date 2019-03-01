@@ -8,8 +8,8 @@ defmodule Mastermind.Boundary.GameServer do
       GenServer.start_link(__MODULE__, Game.new(answer))
     end
 
-    def move(pid, answer) do
-      GenServer.call(pid, {:move, answer})
+    def move(pid, guess) do
+      GenServer.call(pid, {:move, guess})
     end
 
     def state(pid) do
@@ -22,11 +22,13 @@ defmodule Mastermind.Boundary.GameServer do
       {:ok, game}
     end
 
-    def handle_call({:move, answer}, _from, game) do
-      {:reply, :ok, Game.move(game, answer)}
+    def handle_call({:move, guess}, _from, game) do
+      guess = Game.move(game, guess)
+      {:reply, :ok, guess}
     end
 
     def handle_call(:state, _from, game) do
-      {:reply, Game.state(game), game }
+      state = Game.state(game)
+      {:reply, state, game }
     end
 end 
